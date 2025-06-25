@@ -3,6 +3,8 @@
 
 there is an error regarding certificates and all the rest, the school proxy blocks the site because its a new domain, should either resolve itself in a few days or til needs to do silly website tomfoolery
 
+Btw add Neil - Neil is cold btw
+
 // TODO:
 
 Get everybody on
