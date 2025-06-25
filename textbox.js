@@ -91,40 +91,33 @@ cards.forEach(card => {
   });
 
   input.addEventListener("keydown", (e) => {
-    if (visibleSuggestions.length === 0) return;
-
     if (e.key === "ArrowUp") {
-      e.preventDefault();
-      if (selectedSuggestionIndex < visibleSuggestions.length - 1) {
-        selectedSuggestionIndex++;
-        updateSuggestionHighlight(selectedSuggestionIndex);
-      }
-    } else if (e.key === "ArrowDown") {
       e.preventDefault();
       if (selectedSuggestionIndex > 0) {
         selectedSuggestionIndex--;
         updateSuggestionHighlight(selectedSuggestionIndex);
       }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (selectedSuggestionIndex < visibleSuggestions.length - 1) {
+        selectedSuggestionIndex++;
+        updateSuggestionHighlight(selectedSuggestionIndex);
+      }
     } else if (e.key === "Tab" || e.key === "Enter") {
       e.preventDefault();
 
-      // Select first suggestion by default if none selected
-      if (selectedSuggestionIndex === -1) {
-        selectedSuggestionIndex = 0;
-        updateSuggestionHighlight(selectedSuggestionIndex);
+      let selected = input.value.trim();
+
+      if (selected === "" && visibleSuggestions.length > 0) {
+        selected = visibleSuggestions[selectedSuggestionIndex] || visibleSuggestions[0];
+        input.value = selected;
       }
 
-      const selected = visibleSuggestions[selectedSuggestionIndex];
-      if (selected) {
-        input.value = selected;
-        suggestionsDiv.innerHTML = "";
+      suggestionsDiv.innerHTML = "";
 
-        if (e.key === "Enter") {
-          if (studentNames.includes(selected)) {
-            enterGuess(selected);
-          }
-        }
+      if (selected && studentNames.includes(selected)) {
+        enterGuess(selected);
       }
     }
-  });
-});
+  }); 
+}); 
